@@ -769,7 +769,7 @@ export default function Home() {
 
             <div className="about-buttons">
               <a
-                href="/files/Myke_Oneil_Verterra-CV.pdf"
+                href="/files/Myke-Oneil-Verterra-CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="primary-button"
