@@ -1,17 +1,36 @@
+
 "use client";
 
 import Image from "next/image";
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
-/* ========================================
-   BRAND ICONS
-======================================== */
+import {
+  FiArrowUpRight,
+  FiArrowRight,
+  FiArrowDown,
+  FiCode,
+  FiZap,
+  FiPenTool,
+  FiCpu,
+  FiLayers,
+  FiImage,
+  FiMessageCircle,
+  FiTerminal,
+  FiServer,
+  FiMenu,
+  FiX,
+  FiPlay,
+  FiChevronLeft,
+  FiChevronRight,
+  FiMail,
+  FiMapPin,
+  FiCheckCircle,
+  FiExternalLink,
+} from "react-icons/fi";
+
+import { FaWhatsapp } from "react-icons/fa";
+import { VscCode } from "react-icons/vsc";
 
 import {
   SiLaravel,
@@ -33,77 +52,33 @@ import {
   SiPostman,
 } from "react-icons/si";
 
-import { VscCode } from "react-icons/vsc";
-import { FaWhatsapp } from "react-icons/fa";
-
-import {
-  FiCode,
-  FiPenTool,
-  FiZap,
-  FiCpu,
-  FiLayers,
-  FiTerminal,
-  FiImage,
-  FiMessageCircle,
-  FiServer,
-  FiX,
-  FiChevronLeft,
-  FiChevronRight,
-} from "react-icons/fi";
-
 /* ========================================
    EMAILJS CONFIGURATION
 ======================================== */
 
 const EMAILJS_SERVICE_ID = "service_2ro5caj";
 const EMAILJS_TEMPLATE_ID = "template_5j41cef";
-
-/*
-  IMPORTANT:
-  Paste the SAME CURRENT PUBLIC KEY
-  that is already working in your portfolio.
-*/
 const EMAILJS_PUBLIC_KEY = "X6Ft2fsg5tmwWQ_hD";
 
 /* ========================================
-   PROJECT DATA
+   FEATURED PROJECTS
 ======================================== */
 
 const projects = [
   {
-    category: "WEB DEVELOPMENT",
-
+    category: "Web Development",
+    number: "01",
     title: "Marci Metzger Real Estate Redesign",
-
-    cardTitle: (
-      <>
-        Marci Metzger
-        <br />
-        Real Estate Redesign
-      </>
-    ),
-
     image: "/images/marci-real-estate.png",
-
-    alt: "Marci Metzger real estate website redesign",
-
+    alt: "Marci Metzger real estate homepage redesign",
     description:
-      "A modern real estate website redesign with responsive layouts, interactive navigation, property search, image gallery, contact form, and mobile-friendly functionality.",
-
-    tags: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Netlify",
-    ],
-
+      "A responsive real estate experience designed for effortless browsing, clear navigation, and easier client inquiries.",
+    tags: ["HTML", "CSS", "JavaScript", "Netlify"],
     caseStudy: {
       problem:
         "The original real estate homepage needed a more modern, professional, and user-friendly presentation while keeping its important property, service, and contact information.",
-
       whatIBuilt:
         "I redesigned and developed the homepage as a responsive single-page real estate website with improved navigation, property search, service sections, an interactive photo gallery, clean content layouts, and a working contact form.",
-
       role: [
         "Website Redesign",
         "Front-End Development",
@@ -112,11 +87,9 @@ const projects = [
         "Form Integration",
         "Deployment",
       ],
-
       result:
         "A cleaner and more polished real estate experience that works across desktop and mobile, with clearer navigation, improved content presentation, and functional contact options.",
     },
-
     actions: [
       {
         label: "View Live Site",
@@ -126,40 +99,19 @@ const projects = [
   },
 
   {
-    category: "AI AUTOMATION",
-
+    category: "AI Automation",
+    number: "02",
     title: "ASMR Video Creator",
-
-    cardTitle: (
-      <>
-        ASMR Video
-        <br />
-        Creator
-      </>
-    ),
-
     image: "/images/asmr-video-creator.png",
-
     alt: "ASMR Video Creator n8n automation workflow",
-
     description:
-      "An automated video creation workflow that generates ASMR-style content from prompts, monitors the generation process, validates the output, converts the result into a video file, and publishes content to social platforms.",
-
-    tags: [
-      "n8n",
-      "Gemini",
-      "APIs",
-      "YouTube",
-      "Facebook",
-    ],
-
+      "An end-to-end AI video workflow that automates generation, output validation, processing, and publishing.",
+    tags: ["n8n", "Gemini", "APIs", "YouTube", "Facebook"],
     caseStudy: {
       problem:
         "Creating AI-generated videos manually requires multiple repetitive steps, including prompt creation, video generation, status checking, file processing, and publishing.",
-
       whatIBuilt:
         "I created an n8n automation workflow that generates prompts, sends requests for AI video generation, monitors the generation status, validates the returned output, processes the video file, and prepares or publishes the finished content to social platforms.",
-
       role: [
         "Workflow Architecture",
         "API Integration",
@@ -168,11 +120,9 @@ const projects = [
         "Error Handling",
         "Content Publishing",
       ],
-
       result:
         "An end-to-end automated workflow that reduces the manual steps required to create and publish AI-generated ASMR content.",
     },
-
     actions: [
       {
         label: "View Workflow",
@@ -186,31 +136,14 @@ const projects = [
   },
 
   {
-    category: "UI/UX DESIGN",
-
+    category: "UI/UX Design",
+    number: "03",
     title: "LMS Mobile App Design",
-
-    cardTitle: (
-      <>
-        LMS Mobile
-        <br />
-        App Design
-      </>
-    ),
-
     image: "/images/lms-mobile-app.png",
-
-    alt: "LMS mobile application UI UX design",
-
+    alt: "LMS mobile app interface design",
     description:
-      "A student learning management system designed with clear navigation for courses, lessons, assignments, submissions, and grade tracking.",
-
-    tags: [
-      "Figma",
-      "Wireframing",
-      "Prototyping",
-    ],
-
+      "A student-first learning experience built around intuitive courses, assignments, submissions, and grades.",
+    tags: ["Figma", "Wireframing", "Prototyping"],
     actions: [
       {
         label: "View Full Design",
@@ -221,7 +154,117 @@ const projects = [
 ];
 
 /* ========================================
-   TOOLS DATA
+   AI VIDEO PORTFOLIO
+======================================== */
+
+const videos = [
+  {
+    title: "FOCALLURE Beauty Commercial",
+    category: "Beauty / AI UGC",
+    description:
+      "A creator-led beauty ad concept highlighting product presentation through AI-generated video.",
+    src: "/videos/ai-beauty-focallure.mp4",
+    duration: "00:10",
+    number: "01",
+  },
+  {
+    title: "Know Your Worth, Beautiful",
+    category: "AI Podcast / Digital Presenter",
+    description:
+      "A motivational short featuring a consistent digital podcast host and expressive delivery.",
+    src: "/videos/ai-podcast-know-your-worth.mp4",
+    duration: "00:29",
+    number: "02",
+  },
+  {
+    title: "Vikings in North America",
+    category: "AI Documentary / Storytelling",
+    description:
+      "A history-inspired cinematic sequence about Norse voyages to North America.",
+    src: "/videos/ai-documentary-vikings.mp4",
+    duration: "01:08",
+    number: "03",
+  },
+];
+
+/* ========================================
+   SERVICES AND SKILLS
+======================================== */
+
+const capabilities = [
+  {
+    num: "01",
+    icon: FiCode,
+    title: "Web Development",
+    copy:
+      "Responsive websites and applications with clean interfaces, purposeful interactions, and maintainable code.",
+    tags: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Next.js",
+      "Laravel",
+      "PHP",
+      "MySQL / MariaDB",
+    ],
+  },
+  {
+    num: "02",
+    icon: FiZap,
+    title: "AI Automation",
+    copy:
+      "Workflows connecting data, APIs, lead management, follow-ups, and content operations.",
+    tags: [
+      "n8n",
+      "Make",
+      "Zapier",
+      "Airtable",
+      "GoHighLevel",
+      "REST APIs",
+      "Webhooks",
+    ],
+  },
+  {
+    num: "03",
+    icon: FiPenTool,
+    title: "UI/UX Design",
+    copy:
+      "Thoughtful digital experiences shaped through user flows, wireframes, and prototypes.",
+    tags: [
+      "Figma",
+      "Canva",
+      "Wireframing",
+      "Prototyping",
+      "User Flows",
+      "Responsive Design",
+    ],
+  },
+  {
+    num: "04",
+    icon: FiCpu,
+    title: "AI-Assisted Development",
+    copy:
+      "AI tools for coding, debugging, research, troubleshooting, and faster development iteration.",
+    tags: ["ChatGPT", "Claude", "Cursor"],
+  },
+  {
+    num: "05",
+    icon: FiPlay,
+    title: "AI Video Production",
+    copy:
+      "Short-form AI UGC concepts, digital presenters, and cinematic creative storytelling.",
+    tags: [
+      "AI UGC",
+      "Video Concepts",
+      "Google Flow",
+      "CapCut",
+      "Storytelling",
+    ],
+  },
+];
+
+/* ========================================
+   TOOLS & PLATFORMS
 ======================================== */
 
 const toolsRowOne = [
@@ -254,312 +297,209 @@ const toolsRowTwo = [
   { name: "Cursor", icon: FiTerminal },
 ];
 
-/* ========================================
-   TOOL GROUP
-======================================== */
-
-function ToolGroup({
-  tools,
-  duplicate = false,
-}) {
+function ToolRail({ items, reverse = false }) {
   return (
     <div
-      className="tools-group"
-      aria-hidden={
-        duplicate
-          ? "true"
-          : undefined
-      }
+      className="tool-rail"
+      aria-label="Technologies and tools"
     >
-      {tools.map((tool) => {
-        const Icon = tool.icon;
-
-        return (
+      <div className={`tool-track ${reverse ? "reverse" : ""}`}>
+        {[false, true].map((duplicate) => (
           <div
-            className="tool-chip"
-            key={`${
-              duplicate
-                ? "duplicate-"
-                : ""
-            }${tool.name}`}
+            className="tool-set"
+            key={String(duplicate)}
+            aria-hidden={duplicate}
           >
-            <Icon className="tool-logo" />
-
-            <span>
-              {tool.name}
-            </span>
+            {items.map(({ name, icon: Icon }) => (
+              <span className="tool-pill" key={name}>
+                <Icon aria-hidden="true" />
+                {name}
+              </span>
+            ))}
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }
 
-/* ========================================
-   CASE STUDY SECTION
-======================================== */
-
-function CaseStudySection({
-  title,
-  children,
-}) {
+function Label({ children }) {
   return (
-    <div
-      style={{
-        marginTop: "22px",
-      }}
-    >
-      <p
-        style={{
-          margin: "0 0 8px",
-          color: "#262626",
-          fontSize: "9px",
-          fontWeight: "750",
-          letterSpacing: "1px",
-        }}
-      >
-        {title}
-      </p>
-
+    <p className="eyebrow">
+      <span className="eyebrow-dot" />
       {children}
-    </div>
+    </p>
   );
 }
 
 /* ========================================
-   MAIN PAGE
+   MAIN HOME PAGE
 ======================================== */
 
 export default function Home() {
-  /* ========================================
-     PROJECT MODAL STATE
-  ======================================== */
-
-  const [
-    activeProject,
-    setActiveProject,
-  ] = useState(null);
-
-  /* ========================================
-     CONTACT FORM STATE
-  ======================================== */
+  const [activeProject, setActiveProject] = useState(null);
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [formStatus, setFormStatus] = useState("idle");
 
   const formRef = useRef(null);
 
-  const [
-    formStatus,
-    setFormStatus,
-  ] = useState("idle");
+  const hasModal =
+    activeProject !== null || activeVideo !== null;
 
-  /* ========================================
-     PROJECT MODAL FUNCTIONS
-  ======================================== */
+  const selectedProject =
+    activeProject !== null ? projects[activeProject] : null;
 
-  const closeProject = () => {
-    setActiveProject(null);
-  };
+  const selectedVideo =
+    activeVideo !== null ? videos[activeVideo] : null;
 
-  const showPreviousProject = () => {
-    setActiveProject((current) => {
-      if (current === null) {
-        return 0;
-      }
-
-      return (
-        current -
-        1 +
-        projects.length
-      ) % projects.length;
-    });
-  };
-
-  const showNextProject = () => {
-    setActiveProject((current) => {
-      if (current === null) {
-        return 0;
-      }
-
-      return (
-        current +
-        1
-      ) % projects.length;
-    });
-  };
-
-  /* ========================================
-     PROJECT MODAL KEYBOARD CONTROLS
-  ======================================== */
+  /* MODAL KEYBOARD AND SCROLL LOCK */
 
   useEffect(() => {
-    if (activeProject === null) {
-      return;
-    }
+    if (!hasModal) return;
 
-    const previousOverflow =
-      document.body.style.overflow;
-
-    document.body.style.overflow =
-      "hidden";
+    const oldOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setActiveProject(null);
+        setActiveVideo(null);
       }
 
-      if (event.key === "ArrowLeft") {
+      if (
+        event.key === "ArrowLeft" &&
+        activeProject !== null
+      ) {
         setActiveProject(
-          (current) =>
-            (
-              current -
-              1 +
-              projects.length
-            ) % projects.length
+          (n) => (n - 1 + projects.length) % projects.length
         );
       }
 
-      if (event.key === "ArrowRight") {
+      if (
+        event.key === "ArrowRight" &&
+        activeProject !== null
+      ) {
         setActiveProject(
-          (current) =>
-            (
-              current +
-              1
-            ) % projects.length
+          (n) => (n + 1) % projects.length
         );
       }
     };
 
-    window.addEventListener(
-      "keydown",
-      handleKeyDown
-    );
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
-
-      document.body.style.overflow =
-        previousOverflow;
+      document.body.style.overflow = oldOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [activeProject]);
+  }, [hasModal, activeProject]);
 
-  /* ========================================
-     EMAILJS CONTACT FORM
-  ======================================== */
-
-  const handleContactSubmit =
-    async (event) => {
-      event.preventDefault();
-
-      if (formStatus === "sending") {
-        return;
-      }
-
-      if (!formRef.current) {
-        return;
-      }
-
-      setFormStatus("sending");
-
-      try {
-        await emailjs.sendForm(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
-          formRef.current,
-          {
-            publicKey:
-              EMAILJS_PUBLIC_KEY,
-          }
-        );
-
-        formRef.current.reset();
-
-        setFormStatus("success");
-      } catch (error) {
-        console.error(
-          "EmailJS error:",
-          error
-        );
-
-        setFormStatus("error");
-      }
-    };
-
-  /* ========================================
-     AUTO-HIDE SUCCESS MESSAGE
-     Hides after 5 seconds
-  ======================================== */
+  /* FORM NOTIFICATION */
 
   useEffect(() => {
-    if (formStatus !== "success") {
-      return;
-    }
+    if (formStatus !== "success") return;
 
     const timer = setTimeout(() => {
       setFormStatus("idle");
     }, 5000);
 
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, [formStatus]);
 
-  /* ========================================
-     SELECTED PROJECT
-  ======================================== */
+  /* EMAILJS FORM */
 
-  const selectedProject =
-    activeProject !== null
-      ? projects[activeProject]
-      : null;
+  const submitContact = async (event) => {
+    event.preventDefault();
+
+    if (
+      formStatus === "sending" ||
+      !formRef.current
+    ) {
+      return;
+    }
+
+    setFormStatus("sending");
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        {
+          publicKey: EMAILJS_PUBLIC_KEY,
+        }
+      );
+
+      formRef.current.reset();
+      setFormStatus("success");
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setFormStatus("error");
+    }
+  };
+
+  const navItems = [
+    { label: "About", href: "#about" },
+    { label: "Work", href: "#projects" },
+    { label: "AI Videos", href: "#videos" },
+    { label: "Expertise", href: "#skills" },
+    { label: "Contact", href: "#contact" },
+  ];
 
   return (
-    <main>
+    <main id="home">
       {/* =====================================
-          NAVBAR
+          NAVIGATION
       ====================================== */}
 
       <header className="site-header">
-        <div className="main-container navbar">
+        <div className="shell nav-shell">
           <a
+            className="wordmark"
             href="#home"
-            className="brand"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Myke Oneil Verterra home"
           >
-            MYKE ONEIL VERTERRA
+            MOV
+            <span className="wordmark-star">✳</span>
+            <span className="wordmark-caption">
+              MYKE ONEIL VERTERRA
+            </span>
           </a>
 
           <nav
-            className="nav-links"
+            className={`site-nav ${menuOpen ? "open" : ""}`}
             aria-label="Main navigation"
           >
-            <a href="#about">
-              About
-            </a>
-
-            <a href="#projects">
-              Projects
-            </a>
-
-            <a href="#skills">
-              Skills
-            </a>
-
-            <a href="#contact">
-              Contact
-            </a>
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
 
-          <a
-            href="#contact"
-            className="nav-button"
-          >
-            Let&apos;s Talk
-
-            <span>
-              →
-            </span>
+          <a className="nav-cta" href="#contact">
+            Let&apos;s talk
+            <FiArrowUpRight aria-hidden="true" />
           </a>
+
+          <button
+            type="button"
+            className="menu-toggle"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-label={
+              menuOpen
+                ? "Close navigation"
+                : "Open navigation"
+            }
+          >
+            {menuOpen ? <FiX /> : <FiMenu />}
+          </button>
         </div>
       </header>
 
@@ -568,129 +508,88 @@ export default function Home() {
       ====================================== */}
 
       <section
-        className="hero-section"
-        id="home"
+        className="hero shell"
+        aria-labelledby="hero-title"
       >
-        <div className="main-container hero-container">
-          {/* HERO LEFT */}
+        <div className="hero-main">
+          <div className="hero-copy">
+            <Label>
+              WEB · AUTOMATION · AI CREATIVE
+            </Label>
 
-          <div className="hero-content">
-            <p className="hero-label">
-              BUILD • AUTOMATE • DESIGN
-            </p>
-
-            <h1 className="hero-title">
-              Turning ideas
+            <h1 id="hero-title">
+              Digital ideas,
               <br />
-              into real solutions.
+              <span className="type-serif">made</span> real
+              <span className="hero-period">.</span>
             </h1>
 
-            <p className="hero-description">
-              I build websites,
-              automate workflows,
-              and design user-friendly
-              digital experiences that
-              help businesses work
-              smarter and grow faster.
+            <p className="hero-lead">
+              I design and build thoughtful web
+              experiences, intelligent automations,
+              and creative AI-powered content.
             </p>
 
-            <div className="hero-buttons">
+            <div className="hero-actions">
               <a
+                className="button button-dark"
                 href="#projects"
-                className="primary-button"
               >
-                View My Work
-
-                <span>
-                  →
-                </span>
+                Explore my work
+                <FiArrowUpRight />
               </a>
 
               <a
+                className="button button-outline"
                 href="#contact"
-                className="secondary-button"
               >
-                Get in Touch
+                Start a project
+                <FiArrowRight />
               </a>
             </div>
 
-            <div className="hero-stats">
-              <div className="stat-item">
-                <strong>
-                  10+
-                </strong>
-
-                <span>
-                  Projects Completed
-                </span>
-              </div>
-
-              <div className="stat-item">
-                <strong>
-                  3
-                </strong>
-
-                <span>
-                  Core Specializations
-                </span>
-              </div>
-
-              <div className="stat-item stat-wide">
-                <strong>
-                  Web · Automation · UI/UX
-                </strong>
-
-                <span>
-                  Focused on Real Impact
-                </span>
-              </div>
+            <div className="hero-signature">
+              <span className="availability-dot" />
+              AVAILABLE FOR FREELANCE & FULL-TIME
             </div>
           </div>
 
-          {/* HERO RIGHT */}
-
-          <div className="hero-visual">
+          <div className="hero-picture">
             <Image
               src="/images/hero-workspace.png"
-              alt="Myke Verterra web development and automation workspace"
+              alt="A modern desk and website development workspace"
               fill
               priority
-              className="hero-image"
-              sizes="(max-width: 1050px) 100vw, 54vw"
+              sizes="(max-width: 900px) 100vw, 52vw"
             />
 
-            <div className="expertise-card">
-              <div className="expertise-item">
-                <div className="expertise-icon">
-                  <FiCode />
-                </div>
+            <div className="hero-picture-label">
+              <span>
+                DEVELOPMENT × DESIGN
+              </span>
+              <FiArrowUpRight />
+            </div>
 
-                <span>
-                  Web Development
-                </span>
-              </div>
-
-              <div className="expertise-item">
-                <div className="expertise-icon automation-symbol">
-                  <FiZap />
-                </div>
-
-                <span>
-                  AI Automation
-                </span>
-              </div>
-
-              <div className="expertise-item">
-                <div className="expertise-icon">
-                  <FiPenTool />
-                </div>
-
-                <span>
-                  UI/UX Design
-                </span>
-              </div>
+            <div className="hero-float">
+              BUILD.
+              <br />
+              AUTOMATE.
+              <br />
+              <em>CREATE.</em>
             </div>
           </div>
+        </div>
+
+        <div className="hero-bottom">
+          <p>
+            INDEPENDENT DEVELOPER & AI CREATIVE
+            <span>BASED IN THE PHILIPPINES</span>
+          </p>
+
+          <a href="#about">
+            SCROLL TO EXPLORE
+            <FiArrowDown />
+          </a>
         </div>
       </section>
 
@@ -698,605 +597,364 @@ export default function Home() {
           ABOUT
       ====================================== */}
 
-      <section
-        className="about-section"
-        id="about"
-      >
-        <div className="main-container about-container">
-          {/* ABOUT LEFT */}
+      <section className="section shell about" id="about">
+        <div className="section-intro">
+          <Label>01 / ABOUT ME</Label>
+          <span>THE PERSON BEHIND THE WORK</span>
+        </div>
 
-          <div className="about-profile">
-            <div className="about-photo">
-              <Image
-                src="/images/myke-profile.jpeg"
-                alt="Myke Oneil Verterra"
-                fill
-                className="about-profile-image"
-                sizes="(max-width: 720px) 100vw, 31vw"
-              />
-            </div>
+        <div className="about-layout">
+          <div className="portrait-frame">
+            <Image
+              src="/images/myke-profile.jpeg"
+              alt="Myke Oneil Verterra profile portrait"
+              fill
+              sizes="(max-width: 760px) 100vw, 35vw"
+            />
 
-            <div className="personality-card">
-              <div>
-                <span></span>
-                Focused
-              </div>
-
-              <div>
-                <span></span>
-                Creative
-              </div>
-
-              <div>
-                <span></span>
-                Reliable
-              </div>
-
-              <div>
-                <span></span>
-                Always Learning
-              </div>
+            <div className="portrait-stamp">
+              CURIOUS BY NATURE
+              <span>✳</span>
+              BUILDER BY PRACTICE
             </div>
           </div>
 
-          {/* ABOUT RIGHT */}
-
-          <div className="about-content">
-            <p className="section-eyebrow">
-              ABOUT ME
-            </p>
-
-            <h2 className="about-title">
-              A problem-solver who
+          <div className="about-copy">
+            <h2>
+              More than code.
               <br />
-              builds, automates,
+              <span className="type-serif">
+                A creative
+              </span>{" "}
+              way
               <br />
-              and designs.
+              to solve problems.
             </h2>
 
-            <p className="about-description">
-              I&apos;m Myke Oneil
-              Verterra, focused on Web
-              and Mobile Development,
-              AI automation, and UI/UX
-              design. I enjoy creating
-              practical solutions that
-              make work easier,
-              processes faster, and
-              digital experiences more
-              meaningful.
+            <p>
+              I&apos;m Myke Oneil Verterra,
+              focused on Web and Mobile
+              Development, AI automation, and
+              UI/UX design. I enjoy creating
+              practical solutions that make work
+              easier, processes faster, and
+              digital experiences more meaningful.
             </p>
 
-            <div className="about-buttons">
+            <p>
+              Now, I also explore AI UGC production
+              and cinematic storytelling—bringing
+              together technical thinking and
+              creative execution.
+            </p>
+
+            <div className="about-points">
+              <div>
+                <span>01</span>
+                <strong>
+                  Web & mobile development
+                </strong>
+              </div>
+
+              <div>
+                <span>02</span>
+                <strong>
+                  AI workflows & automation
+                </strong>
+              </div>
+
+              <div>
+                <span>03</span>
+                <strong>
+                  Design & AI-powered content
+                </strong>
+              </div>
+            </div>
+
+            <div className="about-facts">
+              <div>
+                <strong>BSIT</strong>
+                <span>
+                  Web & Mobile Development
+                </span>
+              </div>
+
+              <div>
+                <strong>PH</strong>
+                <span>
+                  Based in Manila
+                </span>
+              </div>
+
+              <div>
+                <strong>OPEN</strong>
+                <span>
+                  Freelance / Full-time
+                </span>
+              </div>
+            </div>
+
+            <div className="about-links">
               <a
+                className="button button-dark"
                 href="/files/Myke-Oneil-Verterra-CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="primary-button"
               >
                 Download CV
-
-                <span>
-                  ↓
-                </span>
+                <FiArrowDown />
               </a>
 
-              <a
-                href="#contact"
-                className="secondary-button"
-              >
-                Get in Touch
+              <a className="text-link" href="#contact">
+                Get in touch
+                <FiArrowUpRight />
               </a>
-            </div>
-
-            <div className="about-info-grid">
-              <div className="about-info-card">
-                <div className="info-icon">
-                  ◇
-                </div>
-
-                <div>
-                  <strong>
-                    BSIT
-                  </strong>
-
-                  <span>
-                    Web and Mobile Development
-                  </span>
-                </div>
-              </div>
-
-              <div className="about-info-card">
-                <div className="info-icon">
-                  ⌖
-                </div>
-
-                <div>
-                  <strong>
-                    Philippines
-                  </strong>
-
-                  <span>
-                    Based in Manila
-                  </span>
-                </div>
-              </div>
-
-              <div className="about-info-card">
-                <div className="info-icon">
-                  ✦
-                </div>
-
-                <div>
-                  <strong>
-                    Open to Opportunities
-                  </strong>
-
-                  <span>
-                    Freelance | Full-time
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* =====================================
-          FEATURED PROJECTS
+          SELECTED WORK
       ====================================== */}
 
       <section
-        className="projects-section"
+        className="section shell work"
         id="projects"
       >
-        <div className="main-container projects-container">
-          <div className="projects-header">
-            <div>
-              <p className="section-eyebrow">
-                FEATURED PROJECTS
-              </p>
+        <div className="section-intro">
+          <Label>02 / SELECTED WORK</Label>
+          <span>
+            WEB · AUTOMATION · UI/UX
+          </span>
+        </div>
 
-              <h2 className="projects-title">
-                Selected work that
-                <br />
-                creates impact.
-              </h2>
-            </div>
+        <div className="section-heading work-heading">
+          <h2>
+            Ideas built
+            <br />
+            <span className="type-serif">
+              with purpose.
+            </span>
+          </h2>
 
-            <div className="projects-header-side">
-              <p>
-                A collection of web
-                development, automation,
-                and UI/UX design projects
-                built to solve real
-                problems and deliver
-                practical results.
-              </p>
+          <p>
+            Selected projects that balance
+            clear thinking, practical
+            functionality, and considered design.
+          </p>
+        </div>
 
-              <a
-                href="#project-grid"
-                className="projects-view-all"
+        <div className="project-grid">
+          {projects.map((project, index) => (
+            <article
+              className={`case-card case-card-${index + 1}`}
+              key={project.title}
+            >
+              <button
+                type="button"
+                className="case-image"
+                onClick={() => setActiveProject(index)}
+                aria-label={`View ${project.title} case study`}
               >
-                View All Projects
+                <Image
+                  src={project.image}
+                  alt={project.alt}
+                  fill
+                  sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 55vw"
+                />
 
-                <span>
-                  →
+                <span className="case-image-action">
+                  <FiArrowUpRight />
                 </span>
-              </a>
-            </div>
-          </div>
+              </button>
 
-          {/* PROJECT GRID */}
+              <div className="case-details">
+                <div className="case-kicker">
+                  <span>
+                    {project.number} / {project.category}
+                  </span>
+                  <span>VIEW CASE STUDY</span>
+                </div>
 
-          <div
-            className="projects-grid"
-            id="project-grid"
-          >
-            {projects.map(
-              (
-                project,
-                index
-              ) => (
-                <article
-                  className="project-card"
-                  key={project.title}
+                <button
+                  type="button"
+                  className="case-title-button"
+                  onClick={() => setActiveProject(index)}
                 >
-                  <button
-                    type="button"
-                    className="project-image-wrap project-preview-button"
-                    onClick={() =>
-                      setActiveProject(
-                        index
-                      )
-                    }
-                    aria-label={`Preview ${project.title}`}
-                  >
-                    <Image
-                      src={
-                        project.image
-                      }
-                      alt={
-                        project.alt
-                      }
-                      fill
-                      className="project-image"
-                      sizes="(max-width: 720px) 100vw, (max-width: 1050px) 50vw, 33vw"
-                    />
+                  <h3>{project.title}</h3>
+                  <FiArrowUpRight />
+                </button>
 
-                    <div className="project-image-overlay">
-                      <span>
-                        VIEW PROJECT
-                      </span>
+                <p>{project.description}</p>
 
-                      <span className="project-overlay-arrow">
-                        ↗
-                      </span>
-                    </div>
-                  </button>
-
-                  <div className="project-card-content">
-                    <span className="project-category">
-                      {
-                        project.category
-                      }
-                    </span>
-
-                    <h3>
-                      {
-                        project.cardTitle
-                      }
-                    </h3>
-
-                    <p className="project-description">
-                      {
-                        project.description
-                      }
-                    </p>
-
-                    <div className="project-tags">
-                      {project.tags.map(
-                        (tag) => (
-                          <span key={tag}>
-                            {tag}
-                          </span>
-                        )
-                      )}
-                    </div>
-
-                    <div className="project-actions">
-                      <button
-                        type="button"
-                        className="project-link project-preview-link"
-                        onClick={() =>
-                          setActiveProject(
-                            index
-                          )
-                        }
-                      >
-                        View Project
-
-                        <span>
-                          →
-                        </span>
-                      </button>
-
-                      {project.title ===
-                        "ASMR Video Creator" && (
-                        <a
-                          href="https://www.facebook.com/share/r/1Bzkvvq8TE/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-link project-link-output"
-                        >
-                          Watch Output
-
-                          <span>
-                            →
-                          </span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              )
-            )}
-          </div>
-
-          <div className="projects-footer">
-            <span></span>
-
-            <p>
-              MORE PROJECTS COMING SOON
-            </p>
-
-            <span></span>
-          </div>
+                <div className="case-tags">
+                  {project.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
       {/* =====================================
-          SKILLS
+          AI VIDEO STUDIO
+      ====================================== */}
+
+      <section className="section shell films" id="videos">
+        <div className="section-intro">
+          <Label>03 / AI VIDEO STUDIO</Label>
+          <span>
+            CONCEPT · GENERATE · EDIT
+          </span>
+        </div>
+
+        <div className="section-heading film-heading">
+          <h2>
+            Not just content.
+            <br />
+            <span className="type-serif">
+              Visual stories.
+            </span>
+          </h2>
+
+          <p>
+            Experiments in AI-generated brand
+            content, digital presenters, and
+            cinematic storytelling. Click any
+            film to watch.
+          </p>
+        </div>
+
+        <div className="film-grid">
+          {videos.map((video, index) => (
+            <article
+              className={`film-card film-card-${index + 1}`}
+              key={video.src}
+            >
+              <button
+                className="film-preview"
+                type="button"
+                onClick={() => setActiveVideo(index)}
+                aria-label={`Watch ${video.title}`}
+              >
+                <video
+                  src={video.src}
+                  muted
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                />
+
+                <span className="film-number">
+                  FILM {video.number}
+                </span>
+
+                <span className="film-play">
+                  <FiPlay fill="currentColor" />
+                </span>
+
+                <span className="film-runtime">
+                  {video.duration}
+                </span>
+              </button>
+
+              <div className="film-info">
+                <p>{video.category}</p>
+
+                <button
+                  onClick={() => setActiveVideo(index)}
+                  type="button"
+                >
+                  <h3>{video.title}</h3>
+                  <FiArrowUpRight />
+                </button>
+
+                <span>{video.description}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p className="film-disclaimer">
+          INDEPENDENT CREATIVE CONCEPTS ·
+          AI-GENERATED VISUALS
+        </p>
+      </section>
+
+      {/* =====================================
+          EXPERTISE
       ====================================== */}
 
       <section
-        className="skills-section"
+        className="section shell expertise"
         id="skills"
       >
-        <div className="main-container skills-container">
-          <div className="skills-header">
-            <div>
-              <p className="section-eyebrow">
-                SKILLS &amp; TOOLS
-              </p>
+        <div className="section-intro">
+          <Label>04 / EXPERTISE</Label>
+          <span>
+            WHAT I BRING TO THE TABLE
+          </span>
+        </div>
 
-              <h2 className="skills-title">
-                Tools I use to build,
-                <br />
-                automate, and design.
-              </h2>
-            </div>
+        <div className="section-heading expertise-heading">
+          <h2>
+            Different skills.
+            <br />
+            <span className="type-serif">
+              One clear vision.
+            </span>
+          </h2>
 
-            <div className="skills-header-copy">
-              <p>
-                A practical toolkit for
-                web development,
-                workflow automation,
-                AI-assisted development,
-                and user-friendly
-                digital design.
-              </p>
-            </div>
-          </div>
+          <p>
+            From development to automation
+            and visual storytelling, I work
+            across disciplines to turn ideas
+            into usable experiences.
+          </p>
+        </div>
 
-          {/* SKILL CARDS */}
-
-          <div className="skills-grid">
-            {/* WEB DEVELOPMENT */}
-
-            <article className="skill-card">
-              <div className="skill-icon web-icon">
-                <FiCode />
-              </div>
-
-              <h3>
-                Web Development
-              </h3>
-
-              <p>
-                Responsive websites and
-                web applications built
-                with practical,
-                maintainable, and
-                user-friendly approaches.
-              </p>
-
-              <div className="skill-list">
-                <span>
-                  HTML
-                </span>
-
-                <span>
-                  CSS
-                </span>
-
-                <span>
-                  JavaScript
-                </span>
-
-                <span>
-                  Laravel
-                </span>
-
-                <span>
-                  PHP
-                </span>
-
-                <span>
-                  MySQL / MariaDB
-                </span>
-
-                <span>
-                  Responsive Design
-                </span>
-              </div>
-            </article>
-
-            {/* AI AUTOMATION */}
-
-            <article className="skill-card">
-              <div className="skill-icon automation-icon">
-                <FiZap />
-              </div>
-
-              <h3>
-                AI Automation
-              </h3>
-
-              <p>
-                Workflow automation for
-                lead management, CRM
-                updates, follow-ups,
-                data processing, and
-                business operations.
-              </p>
-
-              <div className="skill-list">
-                <span>
-                  n8n
-                </span>
-
-                <span>
-                  Make
-                </span>
-
-                <span>
-                  Zapier
-                </span>
-
-                <span>
-                  Airtable
-                </span>
-
-                <span>
-                  GoHighLevel
-                </span>
-
-                <span>
-                  REST APIs
-                </span>
-
-                <span>
-                  Webhooks
-                </span>
-
-                <span>
-                  Google Workspace
-                </span>
-              </div>
-            </article>
-
-            {/* UI UX */}
-
-            <article className="skill-card">
-              <div className="skill-icon design-icon">
-                <FiPenTool />
-              </div>
-
-              <h3>
-                UI/UX Design
-              </h3>
-
-              <p>
-                Clean interfaces,
-                wireframes, and
-                prototypes focused on
-                clear navigation,
-                usability, and
-                responsive experiences.
-              </p>
-
-              <div className="skill-list">
-                <span>
-                  Figma
-                </span>
-
-                <span>
-                  Canva
-                </span>
-
-                <span>
-                  Wireframing
-                </span>
-
-                <span>
-                  Prototyping
-                </span>
-
-                <span>
-                  User Flows
-                </span>
-
-                <span>
-                  Responsive Design
-                </span>
-              </div>
-            </article>
-
-            {/* AI ASSISTED DEVELOPMENT */}
-
-            <article className="skill-card">
-              <div className="skill-icon ai-icon">
-                <FiCpu />
-              </div>
-
-              <h3>
-                AI-Assisted Development
-              </h3>
-
-              <p>
-                AI tools integrated into
-                my development workflow
-                for coding, debugging,
-                research,
-                troubleshooting, and
-                faster iteration.
-              </p>
-
-              <div className="skill-list">
-                <span>
-                  ChatGPT
-                </span>
-
-                <span>
-                  Claude
-                </span>
-
-                <span>
-                  Cursor
-                </span>
-              </div>
-            </article>
-          </div>
-
-          {/* =====================================
-              TOOLS & PLATFORMS
-          ====================================== */}
-
-          <div className="tools-area">
-            <div className="tools-heading">
-              <p>
-                TOOLS &amp; PLATFORMS
-              </p>
-
-              <span>
-                Technologies I use
-                across development,
-                automation, design,
-                and operations.
-              </span>
-            </div>
-
-            <div className="tools-marquee">
-              {/* ROW 1 — RIGHT */}
-
-              <div className="tools-marquee-row">
-                <div className="tools-track tools-track-right">
-                  <ToolGroup
-                    tools={
-                      toolsRowOne
-                    }
-                  />
-
-                  <ToolGroup
-                    tools={
-                      toolsRowOne
-                    }
-                    duplicate
-                  />
+        <div className="expertise-grid">
+          {capabilities.map(
+            ({ num, icon: Icon, title, copy, tags }) => (
+              <article
+                className="expertise-tile"
+                key={title}
+              >
+                <div className="expertise-top">
+                  <span>{num} / 05</span>
+                  <Icon aria-hidden="true" />
                 </div>
-              </div>
 
-              {/* ROW 2 — LEFT */}
+                <h3>{title}</h3>
+                <p>{copy}</p>
 
-              <div className="tools-marquee-row">
-                <div className="tools-track tools-track-left">
-                  <ToolGroup
-                    tools={
-                      toolsRowTwo
-                    }
-                  />
-
-                  <ToolGroup
-                    tools={
-                      toolsRowTwo
-                    }
-                    duplicate
-                  />
+                <div className="expertise-tags">
+                  {tags.map((tag) => (
+                    <span key={tag}>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </div>
-            </div>
+              </article>
+            )
+          )}
+        </div>
+
+        <div className="platforms">
+          <div className="platforms-header">
+            <span>TOOLS & PLATFORMS</span>
+            <p>
+              The technology I use to bring
+              ideas to life.
+            </p>
           </div>
+
+          <ToolRail items={toolsRowOne} />
+          <ToolRail items={toolsRowTwo} reverse />
         </div>
       </section>
 
@@ -1305,442 +963,231 @@ export default function Home() {
       ====================================== */}
 
       <section
-        className="contact-section"
+        className="section shell contact"
         id="contact"
       >
-        <div className="main-container contact-container">
-          {/* CONTACT INFO */}
+        <div className="section-intro">
+          <Label>05 / LET&apos;S CONNECT</Label>
+          <span>
+            HAVE SOMETHING IN MIND?
+          </span>
+        </div>
 
-          <div className="contact-info">
-            <p className="section-eyebrow">
-              GET IN TOUCH
-            </p>
-
-            <h2 className="contact-title">
-              Let&apos;s work
+        <div className="contact-layout">
+          <div className="contact-copy">
+            <h2>
+              Have an idea?
               <br />
-              together.
+              <span className="type-serif">
+                Let&apos;s make
+              </span>
+              <br />
+              it happen.
             </h2>
 
-            <p className="contact-description">
-              Have a project in mind,
-              a question, or just want
-              to say hi? Feel free to
-              send a message and
-              I&apos;ll get back to
-              you as soon as possible.
+            <p>
+              Need a website, automation workflow,
+              user-friendly interface, or creative
+              AI video? Tell me what you&apos;re
+              building.
             </p>
 
-            {/* CONTACT DETAILS */}
+            <div className="contact-methods">
+              <a href="mailto:mykeverterra@gmail.com">
+                <FiMail />
 
-            <div className="contact-details">
-              {/* EMAIL */}
-
-              <a
-                href="mailto:mykeverterra@gmail.com"
-                className="contact-detail"
-              >
-                <div className="contact-detail-icon">
-                  ✉
-                </div>
-
-                <div>
-                  <span>
-                    Email
-                  </span>
-
+                <span>
+                  <small>EMAIL</small>
                   <strong>
                     mykeverterra@gmail.com
                   </strong>
-                </div>
-              </a>
+                </span>
 
-              {/* WHATSAPP */}
+                <FiArrowUpRight />
+              </a>
 
               <a
                 href="https://wa.me/639615807893"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contact-detail"
               >
-                <div className="contact-detail-icon">
-                  <FaWhatsapp />
-                </div>
+                <FaWhatsapp />
 
-                <div>
-                  <span>
-                    WhatsApp
-                  </span>
-
+                <span>
+                  <small>WHATSAPP</small>
                   <strong>
                     0961 580 7893
                   </strong>
-                </div>
+                </span>
+
+                <FiArrowUpRight />
               </a>
 
-              {/* LOCATION */}
+              <div>
+                <FiMapPin />
 
-              <div className="contact-detail">
-                <div className="contact-detail-icon">
-                  ⌖
-                </div>
-
-                <div>
-                  <span>
-                    Location
-                  </span>
-
+                <span>
+                  <small>LOCATION</small>
                   <strong>
                     Manila, Philippines
                   </strong>
-                </div>
-              </div>
-
-              {/* OPEN TO */}
-
-              <div className="contact-detail">
-                <div className="contact-detail-icon">
-                  ✦
-                </div>
-
-                <div>
-                  <span>
-                    Open to
-                  </span>
-
-                  <strong>
-                    Freelance | Full-time
-                  </strong>
-                </div>
+                </span>
               </div>
             </div>
 
-            {/* SOCIAL LINKS */}
-
-            <div className="contact-socials">
+            <div className="contact-social">
               <a
                 href="https://www.linkedin.com/in/myke-oneil-verterra-238a5a1b8/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-button"
-                aria-label="LinkedIn"
               >
-                in
+                LinkedIn
+                <FiArrowUpRight />
               </a>
 
               <a
                 href="https://github.com/mykeoneilverterra-code"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-button"
-                aria-label="GitHub"
               >
-                <SiGithub />
-              </a>
-
-              <a
-                href="https://wa.me/639615807893"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-button whatsapp-button"
-                aria-label="WhatsApp"
-              >
-                <FaWhatsapp />
+                GitHub
+                <FiArrowUpRight />
               </a>
             </div>
           </div>
 
-          {/* =====================================
-              EMAILJS CONTACT FORM
-          ====================================== */}
+          {/* EMAILJS FORM */}
 
-          <div className="contact-form-card">
-            <form
-              ref={formRef}
-              className="contact-form"
-              onSubmit={
-                handleContactSubmit
-              }
-            >
-              {/* NAME + EMAIL */}
+          <form
+            className="contact-form-new"
+            ref={formRef}
+            onSubmit={submitContact}
+          >
+            <div className="form-title">
+              <span>PROJECT INQUIRY</span>
+              <FiArrowUpRight />
+            </div>
 
-              <div className="contact-form-row">
-                <div className="form-field">
-                  <label htmlFor="name">
-                    Name
-                  </label>
-
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your name"
-                    autoComplete="name"
-                    required
-                    disabled={
-                      formStatus ===
-                      "sending"
-                    }
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="email">
-                    Email
-                  </label>
-
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    autoComplete="email"
-                    required
-                    disabled={
-                      formStatus ===
-                      "sending"
-                    }
-                  />
-                </div>
-              </div>
-
-              {/* SUBJECT */}
-
-              <div className="form-field">
-                <label htmlFor="subject">
-                  Subject
-                </label>
-
+            <div className="form-duo">
+              <label>
+                Your name
                 <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="What would you like to work on?"
+                  name="name"
+                  autoComplete="name"
+                  placeholder="How should I call you?"
                   required
-                  disabled={
-                    formStatus ===
-                    "sending"
-                  }
+                  disabled={formStatus === "sending"}
                 />
-              </div>
+              </label>
 
-              {/* MESSAGE */}
-
-              <div className="form-field">
-                <label htmlFor="message">
-                  Message
-                </label>
-
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell me about your project..."
+              <label>
+                Email address
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder="you@example.com"
                   required
-                  disabled={
-                    formStatus ===
-                    "sending"
-                  }
-                ></textarea>
-              </div>
+                  disabled={formStatus === "sending"}
+                />
+              </label>
+            </div>
 
-              {/* SEND BUTTON */}
+            <label>
+              Subject
+              <input
+                name="subject"
+                placeholder="What would you like to work on?"
+                required
+                disabled={formStatus === "sending"}
+              />
+            </label>
 
-              <button
-                type="submit"
-                className="contact-submit"
-                disabled={
-                  formStatus ===
-                  "sending"
-                }
-                style={{
-                  opacity:
-                    formStatus ===
-                    "sending"
-                      ? 0.7
-                      : 1,
+            <label>
+              Your message
+              <textarea
+                name="message"
+                rows={5}
+                placeholder="Tell me about your idea, goals, and timeline..."
+                required
+                disabled={formStatus === "sending"}
+              />
+            </label>
 
-                  cursor:
-                    formStatus ===
-                    "sending"
-                      ? "not-allowed"
-                      : "pointer",
-                }}
+            <button
+              className="button button-dark submit-button"
+              type="submit"
+              disabled={formStatus === "sending"}
+            >
+              {formStatus === "sending"
+                ? "Sending..."
+                : "Send inquiry"}
+              <FiArrowUpRight />
+            </button>
+
+            {formStatus === "success" && (
+              <p
+                className="form-feedback success"
+                role="status"
               >
-                {formStatus ===
-                "sending"
-                  ? "Sending..."
-                  : "Send Message"}
+                <FiCheckCircle />
+                Message sent successfully!
+                I&apos;ll get back to you soon.
+              </p>
+            )}
 
-                {formStatus !==
-                  "sending" && (
-                  <span>
-                    →
-                  </span>
-                )}
-              </button>
-
-              {/* =====================================
-                  SUCCESS MESSAGE
-              ====================================== */}
-
-              {formStatus ===
-                "success" && (
-                <div
-                  role="status"
-                  aria-live="polite"
-                  style={{
-                    padding:
-                      "13px 15px",
-
-                    border:
-                      "1px solid #cbd9cb",
-
-                    borderRadius:
-                      "7px",
-
-                    background:
-                      "#f5faf5",
-
-                    color:
-                      "#315c31",
-
-                    fontSize:
-                      "11px",
-
-                    fontWeight:
-                      "600",
-
-                    lineHeight:
-                      "1.5",
-                  }}
-                >
-                  ✓ Message sent
-                  successfully! Thanks
-                  for reaching out.
-                  I&apos;ll get back to
-                  you as soon as
-                  possible.
-                </div>
-              )}
-
-              {/* =====================================
-                  ERROR MESSAGE
-              ====================================== */}
-
-              {formStatus ===
-                "error" && (
-                <div
-                  role="alert"
-                  aria-live="assertive"
-                  style={{
-                    padding:
-                      "13px 15px",
-
-                    border:
-                      "1px solid #e1c4c4",
-
-                    borderRadius:
-                      "7px",
-
-                    background:
-                      "#fff7f7",
-
-                    color:
-                      "#8a3535",
-
-                    fontSize:
-                      "11px",
-
-                    fontWeight:
-                      "600",
-
-                    lineHeight:
-                      "1.5",
-                  }}
-                >
-                  Couldn&apos;t send
-                  your message. Please
-                  try again, or contact
-                  me directly through
-                  email or WhatsApp.
-                </div>
-              )}
-            </form>
-          </div>
+            {formStatus === "error" && (
+              <p
+                className="form-feedback error"
+                role="alert"
+              >
+                Couldn&apos;t send your message.
+                Please try again or contact me
+                directly by email.
+              </p>
+            )}
+          </form>
         </div>
+      </section>
 
-        {/* =====================================
-            BOTTOM CTA
-        ====================================== */}
+      {/* =====================================
+          FOOTER
+      ====================================== */}
 
-        <div className="main-container contact-bottom-cta">
-          <p>
-            HAVE A PROJECT IN MIND?
-          </p>
+      <footer className="site-footer shell">
+        <div className="footer-primary">
+          <a href="#home" className="footer-brand">
+            MOV<span>✳</span>
+          </a>
 
-          <h3>
-            LET&apos;S TURN YOUR IDEA
-            INTO SOMETHING REAL.
-          </h3>
-
-          <span>
-            Need a website, automation
-            workflow, or user-friendly
-            interface? Let&apos;s talk
-            about what you want to
-            build.
-          </span>
+          <h2>
+            Let&apos;s build something
+            <br />
+            <em>worth remembering.</em>
+          </h2>
 
           <a
             href="mailto:mykeverterra@gmail.com"
-            className="contact-bottom-button"
+            className="footer-email"
           >
-            CONTACT ME
-
-            <span>
-              →
-            </span>
+            GET IN TOUCH
+            <FiArrowUpRight />
           </a>
         </div>
 
-        {/* =====================================
-            FOOTER
-        ====================================== */}
-
-        <footer className="main-container site-footer">
+        <div className="footer-bottom">
           <p>
-            © 2026 Myke Oneil
-            Verterra. All rights
-            reserved.
+            © 2026 Myke Oneil Verterra.
+            All rights reserved.
           </p>
 
-          <div>
-            <a href="#about">
-              About
-            </a>
+          <span>
+            WEB / AUTOMATION / DESIGN / AI VIDEO
+          </span>
 
-            <a href="#projects">
-              Projects
-            </a>
-
-            <a href="#skills">
-              Skills
-            </a>
-
-            <a href="#contact">
-              Contact
-            </a>
-
-            <a
-              href="#home"
-              className="back-to-top"
-              aria-label="Back to top"
-            >
-              ↑
-            </a>
-          </div>
-        </footer>
-      </section>
+          <a href="#home">BACK TO TOP ↑</a>
+        </div>
+      </footer>
 
       {/* =====================================
           PROJECT CASE STUDY MODAL
@@ -1748,351 +1195,205 @@ export default function Home() {
 
       {selectedProject && (
         <div
-          className="project-modal-backdrop"
-          onMouseDown={
-            (event) => {
-              if (
-                event.target ===
-                event.currentTarget
-              ) {
-                closeProject();
-              }
+          className="overlay"
+          onMouseDown={(event) => {
+            if (
+              event.target === event.currentTarget
+            ) {
+              setActiveProject(null);
             }
-          }
+          }}
         >
           <div
-            className="project-modal"
+            className="project-dialog"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="project-modal-title"
+            aria-labelledby="project-dialog-title"
           >
-            {/* CLOSE */}
-
             <button
+              className="dialog-close"
               type="button"
-              className="project-modal-close"
-              onClick={
-                closeProject
-              }
-              aria-label="Close project preview"
+              onClick={() => setActiveProject(null)}
+              aria-label="Close project"
             >
               <FiX />
             </button>
 
-            {/* PREVIOUS */}
-
             <button
+              className="dialog-arrow dialog-prev"
               type="button"
-              className="project-modal-arrow project-modal-prev"
-              onClick={
-                showPreviousProject
+              onClick={() =>
+                setActiveProject(
+                  (n) =>
+                    (n - 1 + projects.length) %
+                    projects.length
+                )
               }
               aria-label="Previous project"
             >
               <FiChevronLeft />
             </button>
 
-            {/* NEXT */}
-
             <button
+              className="dialog-arrow dialog-next"
               type="button"
-              className="project-modal-arrow project-modal-next"
-              onClick={
-                showNextProject
+              onClick={() =>
+                setActiveProject(
+                  (n) => (n + 1) % projects.length
+                )
               }
               aria-label="Next project"
             >
               <FiChevronRight />
             </button>
 
-            <div className="project-modal-content">
-              {/* MODAL IMAGE */}
+            <div className="dialog-media">
+              <Image
+                src={selectedProject.image}
+                alt={selectedProject.alt}
+                fill
+                sizes="(max-width: 850px) 100vw, 60vw"
+              />
+            </div>
 
-              <div className="project-modal-image-wrap">
-                <Image
-                  src={
-                    selectedProject.image
-                  }
-                  alt={
-                    selectedProject.alt
-                  }
-                  fill
-                  priority
-                  className="project-modal-image"
-                  sizes="(max-width: 850px) 92vw, 65vw"
-                />
-              </div>
+            <div className="dialog-body">
+              <Label>{selectedProject.category}</Label>
 
-              {/* MODAL INFORMATION */}
+              <h2 id="project-dialog-title">
+                {selectedProject.title}
+              </h2>
 
-              <div className="project-modal-details">
-                <p className="project-modal-category">
-                  {
-                    selectedProject.category
-                  }
-                </p>
-
-                <h2 id="project-modal-title">
-                  {
-                    selectedProject.title
-                  }
-                </h2>
-
-                {/* CASE STUDY */}
-
-                {selectedProject.caseStudy ? (
+              {selectedProject.caseStudy ? (
+                <div className="case-study">
                   <div>
-                    {/* PROBLEM */}
-
-                    <CaseStudySection
-                      title="THE PROBLEM"
-                    >
-                      <p
-                        className="project-modal-description"
-                        style={{
-                          marginTop:
-                            0,
-                        }}
-                      >
-                        {
-                          selectedProject
-                            .caseStudy
-                            .problem
-                        }
-                      </p>
-                    </CaseStudySection>
-
-                    {/* WHAT I BUILT */}
-
-                    <CaseStudySection
-                      title="WHAT I BUILT"
-                    >
-                      <p
-                        className="project-modal-description"
-                        style={{
-                          marginTop:
-                            0,
-                        }}
-                      >
-                        {
-                          selectedProject
-                            .caseStudy
-                            .whatIBuilt
-                        }
-                      </p>
-                    </CaseStudySection>
-
-                    {/* ROLE */}
-
-                    <CaseStudySection
-                      title="MY ROLE"
-                    >
-                      <div
-                        style={{
-                          display:
-                            "flex",
-
-                          flexWrap:
-                            "wrap",
-
-                          gap:
-                            "7px",
-                        }}
-                      >
-                        {
-                          selectedProject
-                            .caseStudy
-                            .role
-                            .map(
-                              (
-                                role
-                              ) => (
-                                <span
-                                  key={
-                                    role
-                                  }
-                                  style={{
-                                    padding:
-                                      "7px 10px",
-
-                                    border:
-                                      "1px solid #e2e2df",
-
-                                    borderRadius:
-                                      "999px",
-
-                                    background:
-                                      "#f7f7f5",
-
-                                    color:
-                                      "#4b4b4b",
-
-                                    fontSize:
-                                      "9px",
-
-                                    fontWeight:
-                                      "550",
-                                  }}
-                                >
-                                  {
-                                    role
-                                  }
-                                </span>
-                              )
-                            )
-                        }
-                      </div>
-                    </CaseStudySection>
-
-                    {/* TOOLS */}
-
-                    <CaseStudySection
-                      title="TOOLS"
-                    >
-                      <div className="project-modal-tags">
-                        {
-                          selectedProject
-                            .tags
-                            .map(
-                              (
-                                tag
-                              ) => (
-                                <span
-                                  key={
-                                    tag
-                                  }
-                                >
-                                  {
-                                    tag
-                                  }
-                                </span>
-                              )
-                            )
-                        }
-                      </div>
-                    </CaseStudySection>
-
-                    {/* RESULT */}
-
-                    <CaseStudySection
-                      title="RESULT"
-                    >
-                      <p
-                        className="project-modal-description"
-                        style={{
-                          marginTop:
-                            0,
-                        }}
-                      >
-                        {
-                          selectedProject
-                            .caseStudy
-                            .result
-                        }
-                      </p>
-                    </CaseStudySection>
-                  </div>
-                ) : (
-                  <>
-                    <p className="project-modal-description">
-                      {
-                        selectedProject.description
-                      }
+                    <h3>THE PROBLEM</h3>
+                    <p>
+                      {selectedProject.caseStudy.problem}
                     </p>
+                  </div>
 
-                    <div className="project-modal-tags">
-                      {
-                        selectedProject
-                          .tags
-                          .map(
-                            (
-                              tag
-                            ) => (
-                              <span
-                                key={
-                                  tag
-                                }
-                              >
-                                {
-                                  tag
-                                }
-                              </span>
-                            )
-                          )
-                      }
-                    </div>
-                  </>
-                )}
+                  <div>
+                    <h3>WHAT I BUILT</h3>
+                    <p>
+                      {selectedProject.caseStudy.whatIBuilt}
+                    </p>
+                  </div>
 
-                {/* PROJECT ACTIONS */}
+                  <div>
+                    <h3>MY ROLE</h3>
 
-                <div className="project-modal-actions">
-                  {
-                    selectedProject
-                      .actions
-                      .map(
-                        (
-                          action,
-                          index
-                        ) => (
-                          <a
-                            key={
-                              action.label
-                            }
-                            href={
-                              action.href
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={
-                              index ===
-                              0
-                                ? "modal-primary-button"
-                                : "modal-secondary-button"
-                            }
-                          >
-                            {
-                              action.label
-                            }
-
-                            <span>
-                              ↗
-                            </span>
-                          </a>
+                    <div className="dialog-tags">
+                      {selectedProject.caseStudy.role.map(
+                        (role) => (
+                          <span key={role}>{role}</span>
                         )
-                      )
-                  }
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3>RESULT</h3>
+                    <p>
+                      {selectedProject.caseStudy.result}
+                    </p>
+                  </div>
                 </div>
+              ) : (
+                <p className="dialog-description">
+                  {selectedProject.description}
+                </p>
+              )}
 
-                {/* PROJECT COUNTER */}
+              <h3 className="dialog-subtitle">
+                TOOLS USED
+              </h3>
 
-                <div className="project-modal-counter">
-                  <span>
-                    {
-                      String(
-                        activeProject +
-                          1
-                      ).padStart(
-                        2,
-                        "0"
-                      )
-                    }
-                  </span>
-
-                  <span className="counter-line"></span>
-
-                  <span>
-                    {
-                      String(
-                        projects.length
-                      ).padStart(
-                        2,
-                        "0"
-                      )
-                    }
-                  </span>
-                </div>
+              <div className="dialog-tags">
+                {selectedProject.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
               </div>
+
+              <div className="dialog-actions">
+                {selectedProject.actions.map(
+                  (action) => (
+                    <a
+                      key={action.label}
+                      href={action.href}
+                      className="button button-dark"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {action.label}
+                      <FiExternalLink />
+                    </a>
+                  )
+                )}
+              </div>
+
+              <p className="dialog-count">
+                {selectedProject.number} / 0
+                {projects.length}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =====================================
+          CINEMATIC VIDEO MODAL
+      ====================================== */}
+
+      {selectedVideo && (
+        <div
+          className="overlay video-overlay"
+          onMouseDown={(event) => {
+            if (
+              event.target === event.currentTarget
+            ) {
+              setActiveVideo(null);
+            }
+          }}
+        >
+          <div
+            className="video-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="video-dialog-title"
+          >
+            <button
+              className="dialog-close"
+              type="button"
+              onClick={() => setActiveVideo(null)}
+              aria-label="Close video"
+            >
+              <FiX />
+            </button>
+
+            <div className="video-dialog-player">
+              <video
+                key={selectedVideo.src}
+                src={selectedVideo.src}
+                controls
+                autoPlay
+                playsInline
+                preload="auto"
+              />
+            </div>
+
+            <div className="video-dialog-copy">
+              <span>
+                {selectedVideo.category} ·
+                {" "}{selectedVideo.duration}
+              </span>
+
+              <h2 id="video-dialog-title">
+                {selectedVideo.title}
+              </h2>
+
+              <p>
+                {selectedVideo.description}
+              </p>
             </div>
           </div>
         </div>
